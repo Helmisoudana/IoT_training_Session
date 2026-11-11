@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>IoT MQTT Lab</title><link rel="stylesheet" href="style.css"></head><body>
+<header>
+ <b class="logo">⚡ IoT MQTT Lab</b>
+ <span id="badge" class="badge off">Déconnecté</span>
+ <span class="sp"></span>
+ <button class="o" id="cfgBtn">⚙ Configuration</button>
+ <button id="bConn">Connecter</button>
+ <button class="o" id="bSim">▶ Simulation</button>
+ <button class="o" id="bDisc">Déconnecter</button>
+</header>
+<section id="cfg" class="cfg">
+ <label>IP du broker (PC)<input id="host" value="192.168.137.1"></label>
+ <label>Port WebSocket<input id="port" value="9001" style="width:90px"></label>
+ <label>IP de l'ESP32 (moniteur série)<input id="ip" placeholder="ex: 192.168.137.45"></label>
+ <label>Ralentissement commande : <b id="slowv">1200</b> ms<input id="slow" type="range" min="0" max="3000" step="100" value="1200"></label>
+ <label class="chk"><input type="checkbox" id="auto" checked> Basculer en simulation si le broker est injoignable</label>
+</section>
+<nav><button class="act" data-p="1">1 · Lecture capteurs</button><button data-p="2">2 · Actionneur</button><button data-p="3">3 · Global</button></nav>
+<main>
+<section class="pg act" id="p1">
+ <div class="flow" id="f1"><div class="node">DHT22 + MQ gaz</div>→<div class="node">ESP32</div><small>TCP 1883</small>→<div class="node">Mosquitto</div><small>WebSocket 9001</small>→<div class="node">Dashboard</div></div>
+ <div class="grid">
+  <div class="card"><h3>Étapes de connexion</h3><ul id="l1"></ul></div>
+  <div class="card"><h3>Dernier PUBLISH décodé</h3><pre id="dec">En attente…</pre><p>🌡 <b id="vt">–</b> °C · 💧 <b id="vh">–</b> % · ☁ gaz <b id="vg">–</b></p></div>
+ </div>
+ <div class="card"><h3>Journal détaillé (ESP32 → broker → dashboard)</h3><div class="log" data-k="r"></div></div>
+</section>
+<section class="pg" id="p2">
+ <div class="flow" id="f2"><div class="node">Dashboard</div>→<div class="node">Mosquitto</div>→<div class="node">ESP32</div>→<div class="node">Relais / Pompe</div></div>
+ <div class="grid">
+  <div class="card c"><h3>Commande</h3><div class="pump">⚙</div><p>Pompe : <b class="ps">OFF</b></p>
+   <button class="on" onclick="cmd('ON')">▶ Ouvrir</button> <button class="offb" onclick="cmd('OFF')">■ Fermer</button></div>
+  <div class="card"><h3>Étapes de la commande</h3><ul id="l2"></ul></div>
+ </div>
+ <div class="card"><h3>Journal détaillé (dashboard → broker → ESP32 → retour)</h3><div class="log" data-k="c"></div></div>
+</section>
+<section class="pg" id="p3">
+ <div class="grid">
+  <div class="card"><h3>Température</h3><div class="kpi" style="color:#e8590c"><span id="kt">–</span> °C</div></div>
+  <div class="card"><h3>Humidité</h3><div class="kpi" style="color:#1c7ed6"><span id="kh">–</span> %</div></div>
+  <div class="card"><h3>Messages reçus</h3><div class="kpi" id="kn">0</div></div>
+  <div class="card"><h3>Pompe</h3><div class="kpi"><span class="ps">OFF</span></div><button class="on" onclick="cmd('ON')">ON</button> <button class="offb" onclick="cmd('OFF')">OFF</button></div>
+ </div>
+ <div class="grid">
+  <div class="card"><h3>Température (orange) &amp; humidité (bleu)</h3><canvas id="c1" width="560" height="220"></canvas></div>
+  <div class="card"><h3>Gaz (ADC 0-4095)</h3><canvas id="c2" width="560" height="220"></canvas></div>
+  <div class="card c"><h3>Jauge gaz <span id="al"></span></h3><canvas id="gg" width="240" height="140"></canvas><div class="pump sm">⚙</div></div>
+ </div>
+</section>
+</main>
+<script src="app.js"></script></body></html>
