@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<!-- MIT License · Copyright (c) 2026 Helmi Soudana, IoT Trainer · https://github.com/Helmisoudana · voir LICENSE.txt -->
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Page 1 · Système MQTT complet — MQTT Lab</title>
+<meta name="description" content="Simulateur MQTT multi-clients : broker en boîte ouverte, topics, abonnements, QoS, retain et LWT.">
+<meta name="author" content="Helmi Soudana">
+<meta name="copyright" content="© 2026 Helmi Soudana, IoT Trainer — MIT License">
+<meta name="theme-color" content="#07111f">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2307111f'/%3E%3Ccircle cx='16' cy='16' r='5' fill='%2320d6c7'/%3E%3Cpath d='M16 11V5M11.5 18.5L6 22M20.5 18.5L26 22' stroke='%2320d6c7' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E">
+<script>document.documentElement.dataset.theme=(()=>{try{return localStorage.getItem('mqtt-theme')}catch(e){}})()||'dark'</script>
+<link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-root="../" data-page="p1">
+<div id="site-nav"></div>
+<header class="top">
+  <h1>Simulateur MQTT</h1>
+  <p class="sub">Ajoutez des clients, donnez-leur des topics, et regardez le broker travailler de l’intérieur.</p>
+  <div class="tools">
+    <button id="addE" class="go">+ ESP32</button>
+    <button id="addA" class="go">+ Application</button>
+    <button id="demo">Démo</button>
+    <button id="rst">Réinitialiser</button>
+    <label><input type="checkbox" id="step"> Pas à pas</label>
+    <button id="next" disabled>Suivant</button>
+    <label>Vitesse <input type="range" id="speed" min="0.5" max="3" step="0.5" value="1"></label>
+    <label><input type="checkbox" id="tcp" checked> Détail TCP</label>
+    <label><input type="checkbox" id="lose"> Perdre le prochain PUBLISH</label>
+  </div>
+</header>
+
+<section class="card sch-wrap">
+  <h2>Schéma en direct</h2>
+  <div class="legend">
+    <span><i class="tag p">PUB</i> publier : client → broker</span>
+    <span><i class="tag s">SUB</i> livrer : broker → client</span>
+    <span>flèche grise en pointillés : client hors ligne ou pas abonné</span>
+  </div>
+  <div class="sch" id="sch">
+    <div class="col" id="colP"></div>
+    <div class="nd" id="bnode"></div>
+    <div class="col" id="colS"></div>
+    <svg id="arrows" aria-hidden="true"></svg>
+  </div>
+</section>
+
+<main class="layout">
+  <section>
+    <h2>Clients</h2>
+    <div id="clients"></div>
+  </section>
+
+  <section id="broker" class="card">
+    <div id="bhead"><h2>Broker (boîte ouverte)</h2></div>
+    <div class="g3">
+      <div id="pSess"><h3>Sessions</h3><div id="tSess"></div></div>
+      <div id="pSubs"><h3>Table des abonnements</h3><div id="tSubs"></div></div>
+      <div id="pTree"><h3>Arbre des topics vus</h3><div id="tTree"></div></div>
+    </div>
+    <h3>Journal : paquets et décisions du broker</h3>
+    <ol id="log"></ol>
+  </section>
+</main>
+<div id="fx"></div>
+
+<footer id="site-footer"></footer>
+<script src="../assets/site.js" defer></script>
+<script src="app.js" defer></script>
+</body>
+</html>

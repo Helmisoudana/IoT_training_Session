@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<!-- MIT License · Copyright (c) 2026 Helmi Soudana, IoT Trainer · https://github.com/Helmisoudana · voir LICENSE.txt -->
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Page 2 · Connexion MQTT — MQTT Lab</title>
+<meta name="description" content="Un capteur, un broker, un dashboard : voyez une connexion MQTT paquet par paquet.">
+<meta name="author" content="Helmi Soudana">
+<meta name="copyright" content="© 2026 Helmi Soudana, IoT Trainer — MIT License">
+<meta name="theme-color" content="#07111f">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2307111f'/%3E%3Ccircle cx='16' cy='16' r='5' fill='%2320d6c7'/%3E%3Cpath d='M16 11V5M11.5 18.5L6 22M20.5 18.5L26 22' stroke='%2320d6c7' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E">
+<script>document.documentElement.dataset.theme=(()=>{try{return localStorage.getItem('mqtt-theme')}catch(e){}})()||'dark'</script>
+<link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-root="../" data-page="p2">
+<div id="site-nav"></div>
+<main>
+<h1>Simulateur MQTT</h1>
+<p class="sub">Regardez un message voyager du capteur au dashboard, paquet par paquet : connexion, abonnement, publication et accusés de réception.</p>
+<section class="card">
+<svg viewBox="0 0 800 250" role="img" aria-label="Capteur ESP32, broker MQTT et dashboard reliés par des lignes sur lesquelles circulent les paquets">
+ <line id="l1" class="ln" x1="175" y1="131" x2="335" y2="131"/>
+ <line id="l2" class="ln" x1="465" y1="131" x2="625" y2="131"/>
+ <g class="nd"><rect x="45" y="60" width="130" height="130" rx="14"/><text x="110" y="100">ESP32</text><text class="s" x="110" y="120">Capteur · publisher</text><text id="tS" class="st" x="110" y="165">● déconnecté</text></g>
+ <g class="nd br"><rect x="335" y="60" width="130" height="130" rx="14"/><text x="400" y="100">Broker</text><text class="s" x="400" y="120">Mosquitto · port 1883</text><text class="st ok" x="400" y="165">● à l’écoute</text></g>
+ <g class="nd"><rect x="625" y="60" width="130" height="130" rx="14"/><text x="690" y="100">Dashboard</text><text class="s" x="690" y="120">Application · subscriber</text><text id="tD" class="st" x="690" y="165">● déconnecté</text></g>
+ <g id="pk"></g>
+</svg>
+<div class="bar">
+ <label><input type="checkbox" id="step"> Pas à pas</label>
+ <button id="next" disabled>Paquet suivant</button>
+ <label>Vitesse <input type="range" id="speed" min="0.5" max="3" step="0.5" value="1"></label>
+</div>
+</section>
+<div class="grid">
+<section class="card">
+ <h2>Actions</h2>
+ <div class="btns">
+  <button id="bS">1. Connecter le capteur</button>
+  <button id="bD">2. Connecter le dashboard</button>
+  <button id="bSub">3. S’abonner</button>
+  <button id="bPub">4. Publier</button>
+  <button id="bPing">Keep-alive (ping)</button>
+  <button id="bXS">Déconnecter le capteur</button>
+  <button id="bXD">Déconnecter le dashboard</button>
+  <button id="bRst">Réinitialiser</button>
+  <button id="bAll" class="go">Lancer le scénario complet</button>
+ </div>
+ <h2>Paramètres</h2>
+ <div class="f">
+  <label class="w">Topic de publication<input type="text" id="topic" value="esp32/salle1/temperature"></label>
+  <label>Valeur<input type="text" id="payload" value="27.5"></label>
+  <label>QoS du message<select id="qos"><option value="0">0 · au plus une fois</option><option value="1" selected>1 · au moins une fois</option><option value="2">2 · exactement une fois</option></select></label>
+  <label>Filtre de l’abonné<input type="text" id="filter" value="esp32/#"></label>
+  <label>QoS de l’abonnement<select id="subq"><option value="0">0</option><option value="1">1</option><option value="2" selected>2</option></select></label>
+  <label class="chk"><input type="checkbox" id="retain"> Retain (garder le dernier message)</label>
+  <label class="chk"><input type="checkbox" id="loss"> Perdre le premier paquet</label>
+ </div>
+</section>
+<section class="card">
+ <h2>Journal des paquets</h2>
+ <ol id="log" aria-live="polite"></ol>
+</section>
+</div>
+<div class="st3">
+ <section class="card"><h2>Clients connectés</h2><ul id="uC"></ul></section>
+ <section class="card"><h2>Abonnements du broker</h2><ul id="uS"></ul></section>
+ <section class="card"><h2>Messages retenus</h2><ul id="uR"></ul></section>
+ <section class="card"><h2>Dernière valeur reçue par le dashboard</h2><ul id="uL"></ul></section>
+</div>
+</main>
+
+<footer id="site-footer"></footer>
+<script src="../assets/site.js" defer></script>
+<script src="script.js" defer></script>
+</body>
+</html>

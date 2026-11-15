@@ -1,0 +1,34 @@
+/*! MIT License · Copyright (c) 2026 Helmi Soudana, IoT Trainer · https://github.com/Helmisoudana · voir LICENSE.txt */
+main{max-width:1080px;margin:0 auto;padding:20px 16px 40px}
+h1{font-size:clamp(26px,5vw,40px);font-weight:800;margin:0 0 4px;letter-spacing:-.02em}
+h2{font-size:16px;font-weight:600;margin:0 0 10px}
+.sub{color:var(--mut);margin:0 0 18px;max-width:60ch}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+.card>svg{display:block;width:100%;height:auto}
+.ln{stroke:var(--line);stroke-width:3;stroke-dasharray:6 6}.ln.on{stroke:var(--broker);stroke-dasharray:none}
+.nd rect{fill:var(--bg);stroke:var(--line);stroke-width:2}.nd.br rect{stroke:var(--broker);stroke-width:3}
+.nd text{fill:var(--ink);text-anchor:middle;font:600 15px system-ui,sans-serif}
+.nd .s{fill:var(--mut);font-weight:400;font-size:12px}.nd .st{fill:var(--mut);font-weight:400;font-size:12px}.nd .st.ok{fill:var(--ack);font-weight:600}
+.pk text{fill:var(--pkink);text-anchor:middle;font:600 11px ui-monospace,Menlo,Consolas,monospace}
+.pk.conn rect{fill:var(--conn)}.pk.pub rect{fill:var(--pub)}.pk.ack rect{fill:var(--ack)}.pk.sub rect{fill:var(--sub)}.pk.tcp rect{fill:var(--tcp)}.pk.lost rect{fill:var(--bad)}
+.bar{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;margin-top:10px;padding-top:10px;border-top:1px solid var(--line);color:var(--mut)}
+.bar label{display:flex;align-items:center;gap:6px}
+.grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:16px;margin-top:16px}
+@media(max-width:760px){.grid{grid-template-columns:1fr}}
+.btns{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
+button{font:inherit;font-weight:600;padding:9px 10px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer;text-align:left}
+button:hover:not(:disabled){border-color:var(--broker)}button:disabled{opacity:.45;cursor:not-allowed}
+button.go{background:var(--broker);color:var(--pkink);border-color:var(--broker);grid-column:1/-1;text-align:center}
+:focus-visible{outline:3px solid var(--conn);outline-offset:2px}
+.f{display:grid;grid-template-columns:1fr 1fr;gap:10px}.f label{display:flex;flex-direction:column;gap:3px;color:var(--mut);font-size:13px}.f .w{grid-column:1/-1}
+input[type=text],select{font:inherit;padding:7px 9px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--ink);width:100%}
+.chk{flex-direction:row!important;align-items:center;gap:6px!important;color:var(--ink)!important}
+#log{list-style:none;margin:0;padding:0;height:470px;overflow-y:auto;display:flex;flex-direction:column;gap:8px}
+#log:empty::before{content:"Le journal des paquets apparaît ici. Commencez par connecter le capteur.";color:var(--mut)}
+#log li{border-left:5px solid var(--tcp);padding:4px 0 4px 10px}
+#log li.conn{border-color:var(--conn)}#log li.pub{border-color:var(--pub)}#log li.ack{border-color:var(--ack)}#log li.sub{border-color:var(--sub)}#log li.warn{border-color:var(--bad)}
+#log .h{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}#log .h span,#log .h i{color:var(--mut);font-size:13px;font-style:normal}
+#log p{margin:2px 0}#log code{display:block;font:12px ui-monospace,Menlo,Consolas,monospace;color:var(--mut);overflow-wrap:anywhere}
+#log li.note p{color:var(--mut);font-style:italic}#log li.warn p{color:var(--bad);font-style:normal}
+.st3{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin-top:16px}
+.st3 ul{list-style:none;margin:0;padding:0;font:13px ui-monospace,Menlo,Consolas,monospace;overflow-wrap:anywhere}.st3 .e{color:var(--mut)}

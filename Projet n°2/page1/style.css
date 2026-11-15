@@ -1,0 +1,95 @@
+/*! MIT License · Copyright (c) 2026 Helmi Soudana, IoT Trainer · https://github.com/Helmisoudana · voir LICENSE.txt */
+h1{margin:0;font-size:28px;letter-spacing:-.02em}
+h2{margin:0 0 8px;font-size:16px}
+h3{margin:0 0 6px;font-size:13px;color:var(--mut)}
+h4{margin:10px 0 4px;font-size:13px;display:flex;gap:8px;align-items:center}
+.sub{color:var(--mut);margin:2px 0 10px}
+.top,.layout{max-width:1280px;margin-inline:auto;padding-inline:16px}
+.top{padding-top:16px}
+.tools{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center}
+.tools label,.chk{display:flex;gap:5px;align-items:center;color:var(--mut);white-space:nowrap}
+.layout{margin-top:12px;margin-bottom:40px;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:16px;align-items:start}
+@media(max-width:900px){.layout{grid-template-columns:1fr}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px;margin-bottom:12px}
+.cl.on{border-color:var(--broker)}
+.cl header{display:flex;gap:8px;align-items:center;margin-bottom:8px}
+.cl h3{margin:0;color:var(--ink);font-size:15px;flex:1}
+.bd{font-size:12px;color:var(--mut)}
+.cl.on .bd{color:var(--ack);font-weight:600}
+.row{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:4px 0}
+.row input[data-k=t],.row input[data-k=f]{flex:1;min-width:110px}
+button,input,select{font:inherit;color:var(--ink)}
+input[type=text],input:not([type]),select{background:var(--bg);border:1px solid var(--line);border-radius:7px;padding:5px 7px}
+button{padding:5px 10px;border-radius:8px;border:1px solid var(--line);background:var(--bg);cursor:pointer;font-weight:600}
+button:hover:not(:disabled){border-color:var(--broker)}
+button:disabled{opacity:.45;cursor:not-allowed}
+button.go{background:var(--broker);border-color:var(--broker);color:var(--pkink)}
+:focus-visible{outline:3px solid var(--conn);outline-offset:2px}
+.in{list-style:none;margin:6px 0 0;padding:6px 8px;border-radius:8px;background:var(--bg);font:12px ui-monospace,Menlo,Consolas,monospace;min-height:28px}
+.e{color:var(--mut)}
+#bhead{border:2px solid var(--broker);border-radius:10px;padding:6px 10px;margin-bottom:10px;width:fit-content}
+#bhead h2{margin:0}
+.g3{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin-bottom:12px}
+.g3>div{border:1px solid var(--line);border-radius:10px;padding:8px;overflow-x:auto}
+.fl{animation:fl .9s}
+@keyframes fl{from{background:color-mix(in srgb,var(--broker) 30%,transparent)}}
+table{border-collapse:collapse;width:100%;font-size:12px}
+th,td{text-align:left;padding:2px 6px;border-bottom:1px solid var(--line)}
+th{color:var(--mut);font-weight:600}
+b.on{color:var(--ack)}
+.tree,.tree ul{list-style:none;margin:0;padding-left:14px;border-left:1px solid var(--line);font-size:12px}
+.tree{padding-left:0;border:0}
+.tree code{color:var(--pub);font-weight:700}
+.tree em{color:var(--sub);font-style:normal;font-size:11px}
+.tree small{color:var(--mut)}
+#log{list-style:none;margin:0;padding:0;height:380px;overflow-y:auto;display:flex;flex-direction:column;gap:6px}
+#log:empty::before{content:"Ajoutez des clients puis connectez-les, ou lancez la démo.";color:var(--mut)}
+#log li{border-left:5px solid var(--tcp);padding:2px 0 2px 10px}
+#log li.conn{border-color:var(--conn)}
+#log li.pub{border-color:var(--pub)}
+#log li.ack{border-color:var(--ack)}
+#log li.sub{border-color:var(--sub)}
+#log li.bk{border-color:var(--broker);background:var(--bg)}
+#log li.warn{border-color:var(--bad)}
+#log .h{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+#log .h span,#log .h i{color:var(--mut);font-size:12px;font-style:normal}
+#log p{margin:2px 0}
+#log code{display:block;font:12px ui-monospace,Menlo,Consolas,monospace;color:var(--mut);overflow-wrap:anywhere}
+#log li.warn p{color:var(--bad)}
+#fx{position:fixed;inset:0;pointer-events:none;z-index:50}
+.pk{position:absolute;left:0;top:0;padding:2px 9px;border-radius:12px;font:600 11px ui-monospace,Menlo,Consolas,monospace;color:var(--pkink);white-space:nowrap}
+.pk.conn{background:var(--conn)}
+.pk.pub{background:var(--pub)}
+.pk.ack{background:var(--ack)}
+.pk.sub{background:var(--sub)}
+.pk.tcp{background:var(--tcp)}
+.pk.lost{background:var(--bad)}
+
+/* ---------- Schéma ---------- */
+.sch-wrap{max-width:1248px;width:calc(100% - 32px);margin:12px auto 0}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;color:var(--mut);font-size:12px;margin-bottom:10px}
+.sch{position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 clamp(48px,10vw,140px);align-items:center;min-height:180px}
+.col{display:flex;flex-direction:column;gap:14px}
+#arrows{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+.nd{position:relative;z-index:1;border:2px solid var(--line);border-radius:10px;padding:6px 9px;background:var(--bg)}
+.nd.on{border-color:var(--broker)}
+.nh{display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+.nd small,.rx{color:var(--mut);font-size:12px}
+.nd.on .nh small{color:var(--ack);font-weight:600}
+.rx{margin-top:4px}
+.ln{font:12px ui-monospace,Menlo,Consolas,monospace;margin-top:4px;overflow-wrap:anywhere}
+.ln code{color:var(--pub);font-weight:700}
+.tag{font:700 10px system-ui,sans-serif;font-style:normal;padding:1px 5px;border-radius:5px;color:var(--pkink)}
+.tag.p{background:var(--pub)}
+.tag.s{background:var(--sub)}
+#bnode{border:3px solid var(--broker);background:var(--panel)}
+#bnode ul{list-style:none;margin:6px 0 0;padding:0;font:12px ui-monospace,Menlo,Consolas,monospace}
+#bnode code{color:var(--pub);font-weight:700}
+#bnode em{color:var(--sub);font-style:normal;font-size:11px}
+.ar{fill:none;stroke-width:2.5;transition:stroke-width .2s}
+.ar.p{stroke:var(--pub)}
+.ar.s{stroke:var(--sub)}
+.ar.off{stroke:var(--tcp);stroke-dasharray:5 5;opacity:.75}
+.ar.hot{stroke-width:6}
+.al{font:600 11px system-ui,sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--panel);stroke-width:4px;text-anchor:middle}
+.sch-wrap{overflow-x:auto}.sch{min-width:640px}
