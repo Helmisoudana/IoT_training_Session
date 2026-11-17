@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IoT Dashboard Builder</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="edit">
+
+  <header id="topbar">
+    <div class="brand">
+      <span class="logo">◈</span>
+      <input id="dash-title" type="text" value="Mon Dashboard IoT" spellcheck="false" title="Nom du dashboard">
+    </div>
+
+    <div class="tb-group">
+      <button id="btn-mode" class="tb primary" type="button">▶ Aperçu</button>
+      <span class="sep"></span>
+      <button id="btn-undo" class="tb icon" type="button" title="Annuler (Ctrl+Z)">↶</button>
+      <button id="btn-redo" class="tb icon" type="button" title="Rétablir (Ctrl+Y)">↷</button>
+      <span class="sep"></span>
+      <button id="btn-export" class="tb" type="button" title="Enregistrer le dashboard dans un fichier .json">💾 Exporter</button>
+      <button id="btn-import" class="tb" type="button" title="Ouvrir un dashboard .json">📂 Importer</button>
+      <button id="btn-example" class="tb" type="button" title="Charger un dashboard d'exemple">🗂 Exemple</button>
+      <button id="btn-clear" class="tb" type="button" title="Tout effacer">🗑 Vider</button>
+      <span class="sep"></span>
+      <button id="btn-demo" class="tb" type="button" title="Simule des données pour tester sans broker">🧪 Démo</button>
+      <button id="btn-broker" class="tb" type="button" title="Changer l'adresse du broker MQTT">⚙️ Broker</button>
+    </div>
+
+    <div id="conn" class="conn disconnected" title="Statut de la connexion au broker">
+      <span class="dot"></span><span id="conn-text">Déconnecté</span>
+    </div>
+  </header>
+
+  <div id="demo-banner">🧪 Mode démo — les valeurs affichées sont simulées</div>
+
+  <div id="layout">
+    <aside id="palette"></aside>
+    <main id="stage"><div id="canvas" class="show-grid"></div></main>
+    <aside id="props"></aside>
+  </div>
+
+  <div id="modal-root"></div>
+  <div id="toast"></div>
+  <input id="file-in" type="file" accept=".json,application/json" hidden>
+  <datalist id="topics-list"></datalist>
+
+  <!-- Bibliothèques locales (fonctionne sans internet) -->
+  <script src="libs/mqtt.min.js"></script>
+  <script src="libs/chart.umd.js"></script>
+
+  <!-- Code du dashboard -->
+  <script src="js/config.js"></script>
+  <script src="js/mqtt-manager.js"></script>
+  <script src="js/widgets.js"></script>
+  <script src="js/editor.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
